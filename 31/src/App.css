@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 30px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 2em;
+}
+
+.notification-form {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.message-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.message-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.type-select {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.type-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.add-btn {
+  padding: 12px 25px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  flex: 1;
+}
+
+.add-btn:hover {
+  background: #5568d3;
+}
+
+.notifications-section h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+}
+
+.no-notifications {
+  text-align: center;
+  color: #999;
+  padding: 40px;
+  font-size: 1.1em;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notification.info {
+  border-left-color: #17a2b8;
+  background: #e7f7f9;
+}
+
+.notification.success {
+  border-left-color: #28a745;
+  background: #e8f5e9;
+}
+
+.notification.warning {
+  border-left-color: #ffc107;
+  background: #fff8e1;
+}
+
+.notification.error {
+  border-left-color: #dc3545;
+  background: #fdecea;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.notification-icon {
+  font-size: 1.5em;
+}
+
+.notification-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notification-message {
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.notification-time {
+  color: #666;
+  font-size: 12px;
+}
+
+.dismiss-btn {
+  background: transparent;
+  border: none;
+  color: #999;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.dismiss-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .form-controls {
+    flex-direction: column;
+  }
+}
