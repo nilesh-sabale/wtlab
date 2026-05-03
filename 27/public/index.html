@@ -123,7 +123,9 @@
     const form = document.getElementById('bookForm');
     const submitBtn = document.getElementById('submitBtn');
     const cancelBtn = document.getElementById('cancelBtn');
+    const booksTable = document.getElementById('booksTable');
 
+    // Form submit
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const book = {
@@ -157,6 +159,7 @@
       }
     });
 
+    // Cancel button
     cancelBtn.addEventListener('click', () => {
       form.reset();
       editId = null;
@@ -164,54 +167,60 @@
       cancelBtn.style.display = 'none';
     });
 
+    // Event delegation for edit and delete buttons
+    booksTable.addEventListener('click', async (e) => {
+      const bookId = e.target.dataset.id;
+      
+      if (e.target.classList.contains('btn-edit')) {
+        try {
+          const res = await fetch(`${API}/${bookId}`);
+          const book = await res.json();
+          editId = bookId;
+          document.getElementById('book_id').value = book.book_id;
+          document.getElementById('title').value = book.title;
+          document.getElementById('author').value = book.author;
+          document.getElementById('year').value = book.year;
+          submitBtn.textContent = 'Update Book';
+          cancelBtn.style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (error) {
+          alert('Error loading book: ' + error.message);
+        }
+      }
+      
+      if (e.target.classList.contains('btn-delete')) {
+        if (confirm('Delete this book?')) {
+          try {
+            await fetch(`${API}/${bookId}`, { method: 'DELETE' });
+            loadBooks();
+          } catch (error) {
+            alert('Error deleting book: ' + error.message);
+          }
+        }
+      }
+    });
+
+    // Load books
     async function loadBooks() {
       try {
         const res = await fetch(API);
         const books = await res.json();
-        const table = document.getElementById('booksTable');
         
-        table.innerHTML = books.map(book => `
+        booksTable.innerHTML = books.map(book => `
           <tr>
             <td>${book.book_id}</td>
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.year}</td>
             <td>
-              <button class="btn-small btn-edit" onclick="window.editBook('${book._id}')">Edit</button>
-              <button class="btn-small btn-delete" onclick="window.deleteBook('${book._id}')">Delete</button>
+              <button class="btn-small btn-edit" data-id="${book._id}">Edit</button>
+              <button class="btn-small btn-delete" data-id="${book._id}">Delete</button>
             </td>
           </tr>
         `).join('');
       } catch (error) {
         console.error('Error loading books:', error);
-      }
-    }
-
-    window.editBook = async function(id) {
-      try {
-        const res = await fetch(`${API}/${id}`);
-        const book = await res.json();
-        editId = id;
-        document.getElementById('book_id').value = book.book_id;
-        document.getElementById('title').value = book.title;
-        document.getElementById('author').value = book.author;
-        document.getElementById('year').value = book.year;
-        submitBtn.textContent = 'Update Book';
-        cancelBtn.style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } catch (error) {
-        alert('Error loading book: ' + error.message);
-      }
-    }
-
-    window.deleteBook = async function(id) {
-      if (confirm('Delete this book?')) {
-        try {
-          await fetch(`${API}/${id}`, { method: 'DELETE' });
-          loadBooks();
-        } catch (error) {
-          alert('Error deleting book: ' + error.message);
-        }
+        booksTable.innerHTML = '<tr><td colspan="5">Error loading books. Make sure server is running.</td></tr>';
       }
     }
 
