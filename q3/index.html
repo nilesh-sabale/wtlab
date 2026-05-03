@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+
+    <!-- NORMAL CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Array Operations</h1>
+
+        <!-- INPUT -->
+        <div class="box">
+            <label>Enter numbers (comma-separated):</label>
+            <input type="text" id="arrayInput" value="64,34,25,12,22,11,90">
+            <button onclick="loadArray()">Load Array</button>
+
+            <p><b>Current Array:</b> <span id="currentArray">[]</span></p>
+        </div>
+
+        <!-- REVERSE -->
+        <div class="box">
+            <h3>Reverse</h3>
+            <button onclick="reverseArray()">Reverse Array</button>
+            <p id="reverseResult"></p>
+        </div>
+
+        <!-- SORT -->
+        <div class="box">
+            <h3>Sorting</h3>
+
+            <select id="sortMethod">
+                <option value="bubble">Bubble Sort</option>
+                <option value="selection">Selection Sort</option>
+                <option value="insertion">Insertion Sort</option>
+            </select>
+
+            <select id="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+
+            <button onclick="sortArray()">Sort</button>
+            <p id="sortResult"></p>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="box">
+            <h3>Searching</h3>
+
+            <select id="searchMethod">
+                <option value="linear">Linear Search</option>
+                <option value="binary">Binary Search</option>
+            </select>
+
+            <input type="number" id="searchValue" value="25">
+            <button onclick="searchArray()">Search</button>
+
+            <p id="searchResult"></p>
+        </div>
+
+    </div>
+
+    <!-- NORMAL JAVASCRIPT -->
+    <script src="script.js"></script>
+</body>
+</html>

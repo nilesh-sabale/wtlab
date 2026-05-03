@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIT Projects - Lab 2</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="bg-primary text-white text-center py-4">
+    <h1>Projects Relevance - VIT Pune</h1>
+</header>
+
+<div class="container my-4">
+
+    <!-- Experiment Table -->
+    <h3>Experiment Details</h3>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>CO Mapping</th>
+                <th>PO Mapping</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Develop a website using toggled tabs with Bootstrap and jQuery</td>
+                <td>CO1, CO2</td>
+                <td>PO2, PO3, PO4</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Tabs -->
+    <h3 class="mt-5">Project Categories</h3>
+    
+    <!-- Tab Buttons -->
+    <ul class="nav nav-pills mb-3">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#sdp">SDP</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#edi">EDI</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#dt">DT</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#course">Course Projects</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content border p-4">
+        
+        <!-- SDP Tab -->
+        <div class="tab-pane fade show active" id="sdp">
+            <h4>Software Development Project (SDP)</h4>
+            <p>SDP focuses on the full Software Development Life Cycle (SDLC).</p>
+            <ul>
+                <li>Identify real-world problems</li>
+                <li>Analyze requirements and design architectures</li>
+                <li>Implement full-stack solutions</li>
+                <li>Deploy and test applications using CI/CD pipelines</li>
+            </ul>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>🧠 NeuroMesh – P2P LLM Network</h5>
+                    <p><strong>Tech:</strong> Rust, React, TypeScript, TCP/UDP, Ollama</p>
+                    <p>Decentralized neural network enabling collaborative LLM inference across local devices without cloud dependency. Achieved sub-3 second response latency with 100% peer discovery accuracy.</p>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>🔐 GhostVault – Secure File System</h5>
+                    <p><strong>Tech:</strong> Java, JavaFX, AES-256, TensorFlow Lite</p>
+                    <p>AI-enhanced file vault with triple-password authentication and behavioral threat detection. Features AES-256 encryption with 94.6% anomaly detection accuracy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDI Tab -->
+        <div class="tab-pane fade" id="edi">
+            <h4>Engineering Design and Innovation (EDI)</h4>
+            <p>EDI emphasizes creation of physical or cyber-physical prototypes.</p>
+            <ul>
+                <li>Product design and ergonomics</li>
+                <li>Sensor integration and IoT</li>
+                <li>Market viability analysis</li>
+            </ul>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>🚍 TransitPulse</h5>
+                    <p><strong>Year:</strong> 2025–26</p>
+                    <p>Public transport optimization system using Time–Space Network modeling to minimize cost and emissions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DT Tab -->
+        <div class="tab-pane fade" id="dt">
+            <h4>Design Thinking (DT)</h4>
+            <p>Human-centric problem solving process:</p>
+            <ul>
+                <li><strong>Empathize:</strong> Understanding user needs</li>
+                <li><strong>Define:</strong> Stating problems</li>
+                <li><strong>Ideate:</strong> Creating solutions</li>
+                <li><strong>Prototype & Test:</strong> Building and testing</li>
+            </ul>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>🫀 Heart Disease Prediction</h5>
+                    <p><strong>Conference:</strong> ICITEEB-2025</p>
+                    <p>Compared ML models for heart disease prediction using ensemble learning methods.</p>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>👶 IoT Infant Care System</h5>
+                    <p><strong>Conference:</strong> CCUBE-2025</p>
+                    <p>IoT-based baby cradle with ESP32 sensors and real-time monitoring.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Projects Tab -->
+        <div class="tab-pane fade" id="course">
+            <h4>Course Projects</h4>
+            <p>Applied learning for specific subjects with practical implementation.</p>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>Plantopia – Plant Selling Platform</h5>
+                    <p><strong>Tech:</strong> HTML, CSS, JS, PHP, MySQL</p>
+                    <p>E-commerce platform with authentication, cart, and admin panel.</p>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>Hostel Management App</h5>
+                    <p><strong>Tech:</strong> Android (Java), Firebase</p>
+                    <p>Location-based attendance tracking with role-based access.</p>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>🧠 NeuroMesh – P2P LLM Network</h5>
+                    <p><strong>Tech:</strong> Rust, React, TypeScript</p>
+                    <p>Decentralized neural network for collaborative LLM inference.</p>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>🔐 GhostVault – Secure File System</h5>
+                    <p><strong>Tech:</strong> Java, JavaFX, AES-256</p>
+                    <p>AI-enhanced file vault with triple-password authentication.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Scroll to Top Button -->
+<button id="scrollTop" class="btn btn-primary" style="display:none; position:fixed; bottom:20px; right:20px; z-index:1000;">
+    ↑ Top
+</button>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2026 VIT Pune</p>
+</footer>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- jQuery Animation -->
+<script src="script.js"></script>
+
+</body>
+</html>
+<!-- All jQuery features still work:
+
+Tab fade-in with pulse animation
+Card hover & click to expand/collapse
+Scroll to top button
+Header slide down
+Cards sequential fade-in -->
