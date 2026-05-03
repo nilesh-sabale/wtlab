@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background: #0b7dda;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .result h2 {
+            color: #2196F3;
+            margin-bottom: 15px;
+        }
+        
+        .age-display {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        .age-display span {
+            font-weight: bold;
+            color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📅 Age Calculator</h1>
+        
+        <label>Enter Your Birth Date:</label>
+        <input type="date" id="birthdate" required>
+        
+        <button onclick="calculateAge()">Calculate Age</button>
+        
+        <div class="result" id="result">
+            <h2>Your Age:</h2>
+            <div class="age-display" id="ageDisplay"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const birthdate = document.getElementById('birthdate').value;
+            
+            if (!birthdate) {
+                alert('Please enter your birth date');
+                return;
+            }
+            
+            const birth = new Date(birthdate);
+            const today = new Date();
+            
+            let years = today.getFullYear() - birth.getFullYear();
+            let months = today.getMonth() - birth.getMonth();
+            let days = today.getDate() - birth.getDate();
+            
+            // Adjust for negative days
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+            
+            // Adjust for negative months
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            // Display result
+            const resultDiv = document.getElementById('result');
+            const ageDisplay = document.getElementById('ageDisplay');
+            
+            ageDisplay.innerHTML = `
+                <p><span>${years}</span> Years</p>
+                <p><span>${months}</span> Months</p>
+                <p><span>${days}</span> Days</p>
+                <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
+                <p style="font-size: 16px;">You are <span>${years} years, ${months} months, and ${days} days</span> old!</p>
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

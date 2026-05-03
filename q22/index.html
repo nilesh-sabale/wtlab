@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Drawing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin: 0 0 20px 0;
+        }
+        
+        canvas {
+            border: 3px solid #333;
+            cursor: crosshair;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .controls {
+            margin: 20px 0;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background: #0b7dda;
+        }
+        
+        button.active {
+            background: #4CAF50;
+        }
+        
+        .clear {
+            background: #f44336;
+        }
+        
+        .clear:hover {
+            background: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Canvas Drawing</h1>
+        
+        <div class="controls">
+            <button id="lineBtn" class="active" onclick="setMode('line')">Draw Line</button>
+            <button id="rectBtn" onclick="setMode('rect')">Draw Rectangle</button>
+            <button id="circleBtn" onclick="setMode('circle')">Draw Circle</button>
+            <button class="clear" onclick="clearCanvas()">Clear Canvas</button>
+        </div>
+        
+        <canvas id="canvas" width="600" height="400"></canvas>
+        
+        <p style="color: #666; margin-top: 15px;">Click two points to draw</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let mode = 'line';
+        let points = [];
+
+        function setMode(newMode) {
+            mode = newMode;
+            points = [];
+            
+            document.getElementById('lineBtn').classList.remove('active');
+            document.getElementById('rectBtn').classList.remove('active');
+            document.getElementById('circleBtn').classList.remove('active');
+            
+            if (mode === 'line') {
+                document.getElementById('lineBtn').classList.add('active');
+            } else if (mode === 'rect') {
+                document.getElementById('rectBtn').classList.add('active');
+            } else {
+                document.getElementById('circleBtn').classList.add('active');
+            }
+        }
+
+        canvas.addEventListener('click', function(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            points.push({x: x, y: y});
+            
+            // Draw point
+            ctx.fillStyle = '#f44336';
+            ctx.beginPath();
+            ctx.arc(x, y, 3, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            if (points.length === 2) {
+                if (mode === 'line') {
+                    drawLine(points[0], points[1]);
+                } else if (mode === 'rect') {
+                    drawRectangle(points[0], points[1]);
+                } else {
+                    drawCircle(points[0], points[1]);
+                }
+                points = [];
+            }
+        });
+
+        function drawLine(p1, p2) {
+            ctx.strokeStyle = '#2196F3';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+        }
+
+        function drawRectangle(p1, p2) {
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y);
+        }
+
+        function drawCircle(p1, p2) {
+            const radius = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+            ctx.strokeStyle = '#ff9800';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(p1.x, p1.y, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            points = [];
+        }
+    </script>
+</body>
+</html>

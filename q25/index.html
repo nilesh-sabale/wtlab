@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic Signal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .traffic-light {
+            background: #333;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        .light {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 15px;
+            border: 3px solid #222;
+            transition: all 0.3s;
+        }
+        
+        .red {
+            background: #400;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .red.active {
+            background: #f44336;
+            box-shadow: 0 0 30px #f44336, inset 0 0 10px rgba(255,255,255,0.3);
+        }
+        
+        .yellow {
+            background: #440;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .yellow.active {
+            background: #ffeb3b;
+            box-shadow: 0 0 30px #ffeb3b, inset 0 0 10px rgba(255,255,255,0.3);
+        }
+        
+        .green {
+            background: #040;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .green.active {
+            background: #4CAF50;
+            box-shadow: 0 0 30px #4CAF50, inset 0 0 10px rgba(255,255,255,0.3);
+        }
+        
+        .controls {
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 30px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+        
+        .btn-red {
+            background: #f44336;
+        }
+        
+        .btn-yellow {
+            background: #ff9800;
+        }
+        
+        .btn-green {
+            background: #4CAF50;
+        }
+        
+        .btn-auto {
+            background: #2196F3;
+        }
+        
+        .btn-stop {
+            background: #666;
+        }
+        
+        button:hover {
+            opacity: 0.8;
+        }
+        
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚦 Traffic Signal</h1>
+        
+        <div class="traffic-light">
+            <div class="light red" id="redLight"></div>
+            <div class="light yellow" id="yellowLight"></div>
+            <div class="light green" id="greenLight"></div>
+        </div>
+        
+        <div class="status" id="status">Click a button to control</div>
+        
+        <div class="controls">
+            <button class="btn-red" onclick="setLight('red')">Red</button>
+            <button class="btn-yellow" onclick="setLight('yellow')">Yellow</button>
+            <button class="btn-green" onclick="setLight('green')">Green</button>
+            <button class="btn-auto" onclick="startAuto()">Auto Mode</button>
+            <button class="btn-stop" onclick="stopAuto()">Stop</button>
+        </div>
+    </div>
+
+    <script>
+        let autoInterval = null;
+        let currentLight = 0;
+        let isAutoMode = false;
+        
+        function setLight(color) {
+            // Only stop auto if not in auto mode
+            if (!isAutoMode) {
+                stopAuto();
+            }
+            
+            document.getElementById('redLight').classList.remove('active');
+            document.getElementById('yellowLight').classList.remove('active');
+            document.getElementById('greenLight').classList.remove('active');
+            
+            if (color === 'red') {
+                document.getElementById('redLight').classList.add('active');
+                document.getElementById('status').textContent = 'STOP';
+            } else if (color === 'yellow') {
+                document.getElementById('yellowLight').classList.add('active');
+                document.getElementById('status').textContent = 'READY';
+            } else if (color === 'green') {
+                document.getElementById('greenLight').classList.add('active');
+                document.getElementById('status').textContent = 'GO';
+            }
+        }
+        
+        function startAuto() {
+            stopAuto();
+            isAutoMode = true;
+            currentLight = 0;
+            
+            // Start with red light immediately
+            setLight('red');
+            
+            autoInterval = setInterval(() => {
+                currentLight++;
+                
+                if (currentLight === 1) {
+                    setLight('yellow');
+                } else if (currentLight === 2) {
+                    setLight('green');
+                } else {
+                    setLight('red');
+                    currentLight = 0;
+                }
+            }, 3000);
+        }
+        
+        function stopAuto() {
+            isAutoMode = false;
+            
+            if (autoInterval) {
+                clearInterval(autoInterval);
+                autoInterval = null;
+            }
+            
+            document.getElementById('redLight').classList.remove('active');
+            document.getElementById('yellowLight').classList.remove('active');
+            document.getElementById('greenLight').classList.remove('active');
+            document.getElementById('status').textContent = 'Stopped';
+        }
+    </script>
+</body>
+</html>

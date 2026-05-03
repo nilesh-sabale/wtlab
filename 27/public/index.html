@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: Arial, sans-serif; 
+      padding: 20px; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    .container { 
+      max-width: 900px; 
+      margin: 0 auto; 
+      background: white; 
+      padding: 30px; 
+      border-radius: 12px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    }
+    h1 { text-align: center; color: #333; margin-bottom: 30px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; }
+    input { 
+      width: 100%; 
+      padding: 10px; 
+      border: 2px solid #ddd; 
+      border-radius: 6px; 
+      font-size: 14px;
+    }
+    input:focus { outline: none; border-color: #667eea; }
+    button { 
+      width: 100%;
+      background: #667eea;
+      color: white; 
+      padding: 12px; 
+      border: none; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-size: 15px; 
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    button:hover { background: #5568d3; }
+    .cancel-btn {
+      background: #6c757d;
+      margin-top: 5px;
+    }
+    .cancel-btn:hover { background: #5a6268; }
+    h2 { color: #333; margin: 30px 0 15px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th { 
+      background: #667eea; 
+      color: white; 
+      padding: 12px; 
+      text-align: left; 
+    }
+    td { 
+      padding: 12px; 
+      border-bottom: 1px solid #ddd; 
+    }
+    tr:hover { background: #f8f9fa; }
+    .btn-small { 
+      padding: 6px 12px; 
+      font-size: 13px; 
+      border-radius: 4px; 
+      border: none; 
+      cursor: pointer; 
+      margin-right: 5px;
+    }
+    .btn-edit { background: #28a745; color: white; }
+    .btn-edit:hover { background: #218838; }
+    .btn-delete { background: #dc3545; color: white; }
+    .btn-delete:hover { background: #c82333; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Library Management</h1>
+    
+    <form id="bookForm">
+      <div class="form-group">
+        <label>Book ID</label>
+        <input type="text" id="book_id" required>
+      </div>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="title" required>
+      </div>
+      <div class="form-group">
+        <label>Author</label>
+        <input type="text" id="author" required>
+      </div>
+      <div class="form-group">
+        <label>Year</label>
+        <input type="number" id="year" required>
+      </div>
+      <button type="submit" id="submitBtn">Add Book</button>
+      <button type="button" class="cancel-btn" id="cancelBtn" style="display:none;">Cancel</button>
+    </form>
+
+    <h2>All Books</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Book ID</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Year</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="booksTable"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const API = 'http://localhost:3000/api/books';
+    let editId = null;
+
+    const form = document.getElementById('bookForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const book = {
+        book_id: document.getElementById('book_id').value,
+        title: document.getElementById('title').value,
+        author: document.getElementById('author').value,
+        year: parseInt(document.getElementById('year').value)
+      };
+
+      try {
+        if (editId) {
+          await fetch(`${API}/${editId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(book)
+          });
+          editId = null;
+          submitBtn.textContent = 'Add Book';
+          cancelBtn.style.display = 'none';
+        } else {
+          await fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(book)
+          });
+        }
+        form.reset();
+        loadBooks();
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      form.reset();
+      editId = null;
+      submitBtn.textContent = 'Add Book';
+      cancelBtn.style.display = 'none';
+    });
+
+    async function loadBooks() {
+      try {
+        const res = await fetch(API);
+        const books = await res.json();
+        const table = document.getElementById('booksTable');
+        
+        table.innerHTML = books.map(book => `
+          <tr>
+            <td>${book.book_id}</td>
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.year}</td>
+            <td>
+              <button class="btn-small btn-edit" onclick="window.editBook('${book._id}')">Edit</button>
+              <button class="btn-small btn-delete" onclick="window.deleteBook('${book._id}')">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      } catch (error) {
+        console.error('Error loading books:', error);
+      }
+    }
+
+    window.editBook = async function(id) {
+      try {
+        const res = await fetch(`${API}/${id}`);
+        const book = await res.json();
+        editId = id;
+        document.getElementById('book_id').value = book.book_id;
+        document.getElementById('title').value = book.title;
+        document.getElementById('author').value = book.author;
+        document.getElementById('year').value = book.year;
+        submitBtn.textContent = 'Update Book';
+        cancelBtn.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (error) {
+        alert('Error loading book: ' + error.message);
+      }
+    }
+
+    window.deleteBook = async function(id) {
+      if (confirm('Delete this book?')) {
+        try {
+          await fetch(`${API}/${id}`, { method: 'DELETE' });
+          loadBooks();
+        } catch (error) {
+          alert('Error deleting book: ' + error.message);
+        }
+      }
+    }
+
+    loadBooks();
+  </script>
+</body>
+</html>

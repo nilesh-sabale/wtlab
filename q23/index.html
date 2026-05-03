@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Style Switcher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        .style-buttons {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        button {
+            padding: 12px 30px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .content {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Style Switcher Demo</h1>
+        
+        <div class="style-buttons">
+            <button id="style1">Blue Theme</button>
+            <button id="style2">Dark Theme</button>
+            <button id="style3">Green Theme</button>
+        </div>
+        
+        <div class="content">
+            <h2>Sample Form</h2>
+            <input type="text" placeholder="Enter your name">
+            <input type="email" placeholder="Enter your email">
+            <textarea rows="4" placeholder="Enter your message"></textarea>
+            <button onclick="alert('Good Morning!')">Submit</button>
+        </div>
+        
+        <div class="content">
+            <h2>Sample Content</h2>
+            <p>This is a sample paragraph. Click the style buttons above to change the entire page style.</p>
+            <p>All controls including buttons, inputs, and text will change according to the selected theme.</p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Style 1 - Blue Theme
+            $('#style1').click(function() {
+                $('body').css({
+                    'background': 'linear-gradient(135deg, #667eea, #764ba2)',
+                    'color': '#333'
+                });
+                
+                $('.container').css({
+                    'background': 'white',
+                    'box-shadow': '0 5px 15px rgba(0,0,0,0.3)'
+                });
+                
+                $('button').css({
+                    'background': '#2196F3',
+                    'color': 'white'
+                });
+                
+                $('input, textarea').css({
+                    'border': '2px solid #2196F3',
+                    'background': 'white',
+                    'color': '#333'
+                });
+                
+                $('h1, h2').css('color', '#2196F3');
+            });
+            
+            // Style 2 - Dark Theme
+            $('#style2').click(function() {
+                $('body').css({
+                    'background': '#1a1a1a',
+                    'color': '#fff'
+                });
+                
+                $('.container').css({
+                    'background': '#2d2d2d',
+                    'box-shadow': '0 5px 15px rgba(0,0,0,0.5)'
+                });
+                
+                $('button').css({
+                    'background': '#ff9800',
+                    'color': 'white'
+                });
+                
+                $('input, textarea').css({
+                    'border': '2px solid #ff9800',
+                    'background': '#1a1a1a',
+                    'color': '#fff'
+                });
+                
+                $('h1, h2').css('color', '#ff9800');
+                $('p').css('color', '#ccc');
+            });
+            
+            // Style 3 - Green Theme
+            $('#style3').click(function() {
+                $('body').css({
+                    'background': 'linear-gradient(135deg, #11998e, #38ef7d)',
+                    'color': '#333'
+                });
+                
+                $('.container').css({
+                    'background': '#f0fff0',
+                    'box-shadow': '0 5px 15px rgba(0,0,0,0.3)'
+                });
+                
+                $('button').css({
+                    'background': '#4CAF50',
+                    'color': 'white'
+                });
+                
+                $('input, textarea').css({
+                    'border': '2px solid #4CAF50',
+                    'background': 'white',
+                    'color': '#333'
+                });
+                
+                $('h1, h2').css('color', '#2e7d32');
+            });
+        });
+    </script>
+</body>
+</html>
