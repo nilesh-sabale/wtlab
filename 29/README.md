@@ -9,22 +9,35 @@ A React application that displays a real-time digital clock which updates every 
 - Start/Stop clock functionality
 - Display current date
 
-## Setup
+## Setup with Vite
 
-1. Install dependencies:
+1. Navigate to the lab folder:
 ```bash
 cd 29
+```
+
+2. Install dependencies:
+```bash
 npm install
 ```
 
-2. Start the development server:
+3. Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
-3. Open browser at http://localhost:3000
+4. Open browser at the URL shown (usually http://localhost:5173)
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+The build output will be in the `dist` folder.
 
 ## Technologies
 - React 18
+- Vite (Fast build tool)
 - React Hooks (useState, useEffect)
 - setInterval for time updates

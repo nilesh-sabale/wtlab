@@ -9,22 +9,35 @@ A React application that allows users to toggle between Light Mode and Dark Mode
 - Display current theme mode
 - Theme persists during component re-render
 
-## Setup
+## Setup with Vite
 
-1. Install dependencies:
+1. Navigate to the lab folder:
 ```bash
 cd 28
+```
+
+2. Install dependencies:
+```bash
 npm install
 ```
 
-2. Start the development server:
+3. Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
-3. Open browser at http://localhost:3000
+4. Open browser at the URL shown (usually http://localhost:5173)
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+The build output will be in the `dist` folder.
 
 ## Technologies
 - React 18
+- Vite (Fast build tool)
 - React Hooks (useState)
 - CSS transitions

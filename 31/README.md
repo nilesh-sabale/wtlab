@@ -12,14 +12,14 @@ A React application that displays system notifications using Redux to manage not
 - Multiple notification types (Info, Success, Warning, Error)
 - Timestamps for each notification
 
-## Setup Instructions
+## Setup with Vite
 
-1. Navigate to the project folder:
+1. Navigate to the lab folder:
 ```bash
 cd 31
 ```
 
-2. Install all dependencies:
+2. Install dependencies:
 ```bash
 npm install
 ```
@@ -28,14 +28,22 @@ This will install:
 - react & react-dom (v18.2.0)
 - redux (v4.2.1) - State management
 - react-redux (v8.0.5) - Redux bindings for React
-- react-scripts (v5.0.1) - Build tools
+- vite (v5.0.8) - Fast build tool
 
 3. Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
-4. Open browser at http://localhost:3000
+4. Open browser at the URL shown (usually http://localhost:5173)
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+The build output will be in the `dist` folder.
 
 ## How It Works
 1. User enters notification message and selects type
@@ -49,5 +57,6 @@ npm start
 - **React 18** - UI library
 - **Redux** - State management
 - **React-Redux** - Redux bindings
+- **Vite** - Fast build tool and dev server
 - **Redux Actions** - ADD_NOTIFICATION, REMOVE_NOTIFICATION
 - **Redux Reducer** - Manages notification array

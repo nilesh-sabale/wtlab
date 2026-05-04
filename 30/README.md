@@ -11,14 +11,14 @@ A React application that allows users to filter products by category or price ra
 - Display filtered products dynamically
 - Reset filters functionality
 
-## Setup Instructions
+## Setup with Vite
 
-1. Navigate to the project folder:
+1. Navigate to the lab folder:
 ```bash
 cd 30
 ```
 
-2. Install all dependencies (React, Redux, React-Redux):
+2. Install dependencies:
 ```bash
 npm install
 ```
@@ -27,19 +27,28 @@ This will install:
 - react & react-dom (v18.2.0)
 - redux (v4.2.1) - State management
 - react-redux (v8.0.5) - Redux bindings for React
-- react-scripts (v5.0.1) - Build tools
+- vite (v5.0.8) - Fast build tool
 
 3. Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
-4. Open browser at http://localhost:3000
+4. Open browser at the URL shown (usually http://localhost:5173)
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+The build output will be in the `dist` folder.
 
 ## Technologies Used
 - **React 18** - UI library
 - **Redux** - State management (stores product data and filters)
 - **React-Redux** - Connects Redux store to React components
+- **Vite** - Fast build tool and dev server
 - **Redux Store** - Centralized state container
 - **Actions** - Define filter operations
 - **Reducer** - Handles filter logic
